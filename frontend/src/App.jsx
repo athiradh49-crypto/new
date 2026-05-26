@@ -7,13 +7,15 @@ import Navbar2 from './Navbar2'
 import Hero2 from './Hero2'
 import Card2 from './Card2'
 import Footer1 from './Footer1'
-import 'bootstrap/dist/css/bootstrap.min.css';
+import Login1 from './Login1'
+
 
 function App() {
   const [complaints,setComplaints] = useState([]);
   const[department,setDepartment] = useState("");
   const[description,setDescription] = useState("");
   const[image, setImage] = useState("");
+  const[isLoggedIn,setIsLoggedIn] = useState(false);
   
   const addComplaints=()=>{
     const newComplaint={
@@ -24,12 +26,18 @@ function App() {
     setComplaints([...complaints,newComplaint]);
 
   }
+  const deleteComplaint=(index)=>{
+    const updatecomplaints=complaints.filter((item,i)=> i !==index)
+    setComplaints(updatedComplaints)
+  }
   
 
   return (
+    isLoggedIn ?
 
           <div>
-            <Navbar2>
+            <Navbar2 setIsLoggedIn={setIsLoggedIn}
+            >
 
             </Navbar2>
             
@@ -51,15 +59,21 @@ function App() {
             department={item.department}
             description={item.description}
             image={item.image}
+            deleteComplaint={deleteComplaint}
+            index={index}
             
             
             ></Card2> 
 ))
 }
+
             <Footer1>
 
             </Footer1>
+
           </div>
+          :
+          <Login1 setIsLoggedIn={setIsLoggedIn}/>
   )
 }
 

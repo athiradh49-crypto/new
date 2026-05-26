@@ -2,8 +2,9 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import { Button } from "react-bootstrap";
 
-function Navbar2() {
+function Navbar2(props) {
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container fluid>
@@ -56,6 +57,7 @@ function Navbar2() {
               User
             </Nav.Link>
           </Nav>
+          <Button variant="danger" onClick={()=>props.setIsLoggedIn(false)}>Logout</Button>
         </Navbar.Collapse>
       </Container>
     </Navbar>
