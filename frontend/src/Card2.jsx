@@ -11,9 +11,10 @@ function Card2(props) {
           {props.description}
         
         </Card.Text>
-        
-        <Button variant="primary" onClick={()=>props.setSelcomplaint(props.item)}>view complaint </Button>
-        <button variant="danger" onClick={()=>props.deleteComplaint(props.index)}>Delete</button>
+        <Button variant='danger' onClick={props.deleteComplaint}>
+          Delete
+        </Button>
+    
       </Card.Body>
     </Card>
   );
