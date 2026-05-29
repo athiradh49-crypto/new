@@ -20,7 +20,7 @@ app.post('/complaints', async (req, res) => {
         res.status(201).json({ message: "Complaint filed successfully!", data: newComplaint});
 
      } catch (error) {
-        res.status(500).json({ message: "failed to save complaint", error: error.message});
+        res.status(501).json({ message: "failed to save complaint", error: error.message});
 
      }
 
