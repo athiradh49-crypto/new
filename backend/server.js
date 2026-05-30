@@ -13,6 +13,38 @@ const complaintSchema = new mongoose.Schema({
     image: String 
 });
 const Complaint = mongoose.model('Complaint',complaintSchema);
+
+const userSchema = new mongoose.Schema({
+    username:String,
+    password:String
+});
+const User = mongoose.model('User',userSchema);
+
+app.post('/login', async (req, res) => {
+    try {
+        const { username, password } = req.body;
+        const foundUser = await User.findOne({ username: username, password: password });
+        if (foundUser) {
+            res.status(200).json({ message: "login successfull!"});
+        }
+        else{
+            res.status(401).json({ message: "wrong username or password" });
+
+        }
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+
+    }
+});
+app.post('/register', async(req,res)=>{
+    try{
+        const newUser=new User(req.body);
+        await newUser.save(
+            res.status(201).json({message: "User created successfully!"}));
+        } catch (error){
+            res.status(500).json({error:error.message});
+        }
+      });  
 app.post('/complaints', async (req, res) => {
     try {
         const newComplaint = new Complaint(req.body);
@@ -20,7 +52,7 @@ app.post('/complaints', async (req, res) => {
         res.status(201).json({ message: "Complaint filed successfully!", data: newComplaint});
 
      } catch (error) {
-        res.status(501).json({ message: "failed to save complaint", error: error.message});
+        res.status(501  ).json({ message: "failed to save complaint", error: error.message});
 
      }
 
